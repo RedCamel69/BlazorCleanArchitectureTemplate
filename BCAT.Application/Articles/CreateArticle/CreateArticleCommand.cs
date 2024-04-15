@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCAT.Application.Articles.GetArticles
+namespace BCAT.Application.Articles.CreateArticle
 {
-    public class GetArticlesQuery : IRequest<List<ArticleResponse>>
+    public class CreateArticleCommand : IRequest<ArticleResponse>
     {
+        public ArticleResponse? Article { get; set; }
     }
 }

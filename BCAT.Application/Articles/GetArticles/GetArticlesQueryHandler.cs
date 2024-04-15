@@ -1,4 +1,5 @@
 ﻿using BCAT.Domain.Articles;
+using Mapster;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCAT.Application.Articles.GetArticles
 {
-    public class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, List<Article>>
+    public class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, List<ArticleResponse>>
     {
         private readonly IArticleRepository _articleRepository;
 
@@ -16,10 +17,10 @@ namespace BCAT.Application.Articles.GetArticles
         {
             _articleRepository = articleRepository;
         }
-        public async Task<List<Article>> Handle(GetArticlesQuery request, CancellationToken cancellationToken)
+        public async Task<List<ArticleResponse>> Handle(GetArticlesQuery request, CancellationToken cancellationToken)
         {
             var articles = await _articleRepository.GetAllArticlesAsync();
-            return articles;
+            return articles.Adapt<List<ArticleResponse>>();
         }
     }
 }
