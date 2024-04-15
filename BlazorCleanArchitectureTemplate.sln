@@ -5,7 +5,11 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{860573BA-E5F0-4F4A-B2D8-1F6324A1AF4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.WebUI.Server", "BCAT.WebUI.Server\BCAT.WebUI.Server.csproj", "{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.WebUI.Server", "BCAT.WebUI.Server\BCAT.WebUI.Server.csproj", "{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.Domain", "BCAT.Domain\BCAT.Domain.csproj", "{4E03468E-6292-4A1B-A217-546975995898}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.Application", "BCAT.Application\BCAT.Application.csproj", "{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,22 @@ Global
 		{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E03468E-6292-4A1B-A217-546975995898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E03468E-6292-4A1B-A217-546975995898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E03468E-6292-4A1B-A217-546975995898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E03468E-6292-4A1B-A217-546975995898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6AC22B0-D6A2-4622-B8A5-76D5927074F6} = {860573BA-E5F0-4F4A-B2D8-1F6324A1AF4F}
+		{4E03468E-6292-4A1B-A217-546975995898} = {860573BA-E5F0-4F4A-B2D8-1F6324A1AF4F}
+		{2E5865E2-6A4A-4869-A7A4-D415FD3946D1} = {860573BA-E5F0-4F4A-B2D8-1F6324A1AF4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DE14C66-E7CB-4269-A0BF-5D844C6D2C86}
