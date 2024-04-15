@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{860573BA-E5F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.WebUI.Server", "BCAT.WebUI.Server\BCAT.WebUI.Server.csproj", "{A6AC22B0-D6A2-4622-B8A5-76D5927074F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.Domain", "BCAT.Domain\BCAT.Domain.csproj", "{4E03468E-6292-4A1B-A217-546975995898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.Domain", "BCAT.Domain\BCAT.Domain.csproj", "{4E03468E-6292-4A1B-A217-546975995898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.Application", "BCAT.Application\BCAT.Application.csproj", "{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.Application", "BCAT.Application\BCAT.Application.csproj", "{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

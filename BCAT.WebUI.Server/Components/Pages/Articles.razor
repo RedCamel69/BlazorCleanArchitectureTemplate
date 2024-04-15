@@ -1,0 +1,43 @@
+﻿@page "/articles";
+@using BCAT.Application.Articles
+@using BCAT.Domain.Articles
+@attribute [StreamRendering]
+
+
+@inject IArticleService ArticleService;
+
+<PageTitle>Articles</PageTitle>
+<h3>Articles</h3>
+
+@if (articles.Count == 0)
+{
+    <p><em>loading....</em></p>
+}
+else
+{
+    foreach (Article a in articles)
+    {
+        <h4>@a.Title</h4>
+        <p>@a.Content</p>
+        <small>@a.DatePublished</small>
+    }
+}
+
+@code {
+    private List<Article> articles = new List<Article>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+        var result = ArticleService.GetAllArticles();
+        if (result != null)
+        {
+            articles = result;
+        }
+
+    }
+
+
+}
