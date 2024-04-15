@@ -31,7 +31,7 @@ else
     {
         await Task.Delay(1000);
 
-        var result = ArticleService.GetAllArticles();
+        var result = await ArticleService.GetAllArticles();
         if (result != null)
         {
             articles = result;
