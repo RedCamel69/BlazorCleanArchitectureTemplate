@@ -1,10 +1,12 @@
 ﻿@page "/articles";
 @using BCAT.Application.Articles
+
+@using BCAT.Application.Articles.GetArticles
 @using BCAT.Domain.Articles
+
 @attribute [StreamRendering]
 
-
-@inject IArticleService ArticleService;
+@inject ISender Sender;
 
 <PageTitle>Articles</PageTitle>
 <h3>Articles</h3>
@@ -29,9 +31,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
+        //await Task.Delay(1000);
 
-        var result = await ArticleService.GetAllArticles();
+        var result = await Sender.Send(new GetArticlesQuery());
         if (result != null)
         {
             articles = result;
