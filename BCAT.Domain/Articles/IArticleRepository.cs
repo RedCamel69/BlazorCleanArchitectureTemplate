@@ -10,6 +10,10 @@ namespace BCAT.Domain.Articles
     {
         Task<List<Article>> GetAllArticlesAsync();
 
-        Task<Article> CreateArticleAsync(Article article);   
+        Task<Article?> GetArticleByIdAsync(int Id);
+
+        Task<Article> CreateArticleAsync(Article article);
+
+        Task<Article?> UpdateArticleAsync(Article article);
     }
 }

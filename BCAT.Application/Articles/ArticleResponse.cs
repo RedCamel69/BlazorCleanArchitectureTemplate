@@ -9,7 +9,7 @@ namespace BCAT.Application.Articles
     //general article DTO
     public record struct ArticleResponse
     {
-        int Id;
+        public int Id;
         public string Title;
         public string? Content;
         public DateTime DatePublished;

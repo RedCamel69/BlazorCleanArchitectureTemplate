@@ -1,4 +1,5 @@
 ﻿@page "/article-editor"
+@page "/article-editor/{ArticleId:int}"
 
 @using BCAT.Application.Articles.CreateArticle;
 @using Mapster;
@@ -8,27 +9,78 @@
 
 @inject ISender Sender;
 
-<PageTitle>Create new Article</PageTitle>
-<h3>Create new Article</h3>
 
-<EditForm Model="Article" OnSubmit="HandleSubmit" FormName="ArticleEditorForm">
-    <InputText class="form-control" @bind-Value="Article.Title"></InputText>
-    <InputTextArea class="form-control" @bind-Value="Article.Content"></InputTextArea>
-    <InputDate class="form-control" @bind-Value="Article.DatePublished"></InputDate>
-    <div>
-        <InputCheckbox class="form-control form-check-input" @bind-Value="Article.IsPublished"></InputCheckbox>
-        <label class="form-check-label">Is Published</label>   
-    </div>
-    <button type="submit">Submit</button>
-</EditForm>
+@if (isEditMode && Article is not null)
+{
+    <PageTitle>Edit Article @Article.Title</PageTitle>
+    <h3>Edit Article @Article.Title</h3>
+}
+else
+{
+    <PageTitle>Create new Article</PageTitle>
+    <h3>Create new Article</h3>
+
+}
+
+@if (Article is not null)
+{
+    <EditForm Model="Article" OnSubmit="HandleSubmit" FormName="ArticleEditorForm">
+        <InputText class="form-control" @bind-Value="Article.Title"></InputText>
+        <InputTextArea class="form-control" @bind-Value="Article.Content"></InputTextArea>
+        <InputDate class="form-control" @bind-Value="Article.DatePublished"></InputDate>
+        <div>
+            <InputCheckbox class="form-control form-check-input" @bind-Value="Article.IsPublished"></InputCheckbox>
+            <label class="form-check-label">Is Published</label>   
+        </div>
+        <button type="submit">Submit</button>
+    </EditForm>
+}
 
 @code {
+    private bool isEditMode => ArticleId != null;
     [SupplyParameterFromForm]
-    public ArticleModel Article { get; set; } = new(){ Title = string.Empty};
+    public ArticleModel? Article { get; set; }
+    [Parameter]
+    public int? ArticleId{ get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(ArticleId is not null)
+        {
+            var result = await Sender.Send(
+                new GetArticleByIdQuery() {
+                     Id=(int)ArticleId
+                });
+
+            if (result is not null)
+            {
+                Article ??= result.Adapt<ArticleModel>();
+                Article.Id = (int)ArticleId; //SSR gotcha
+            }
+        }
+        else
+        {
+            Article ??= new() { Title = string.Empty};
+    }
+
+    }
 
     async Task HandleSubmit()
     {
-        var command = Article.Adapt<CreateArticleCommand>();
-        var result = await Sender.Send(command);
+        if (isEditMode)
+        {
+            var command = Article.Adapt<UpdateArticleCommand>();
+            var result = Sender.Send(command);
+            if (result is not null)
+                Article = result.Adapt<ArticleModel>();
+        }
+        else
+        {
+            var command = Article.Adapt<CreateArticleCommand>();
+            var result = await Sender.Send(command);
+            Article = result.Adapt<ArticleModel>();
+            
+
+        }
     }
 }

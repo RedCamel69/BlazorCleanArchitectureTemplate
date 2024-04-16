@@ -28,5 +28,35 @@ namespace BCAT.Infrastructure.Repositories
         {
             return await _context.Articles.ToListAsync();
         }
+
+        public async Task<Article?> GetArticleByIdAsync(int Id)
+        {
+           var article = await _context.Articles.FindAsync(Id);
+            if (article == null)
+            {
+
+            }
+            return article!;
+
+        }
+
+        public async Task<Article?> UpdateArticleAsync(Article article)
+        {
+           var articleToUpdate = await GetArticleByIdAsync(article.Id);
+            if(articleToUpdate == null)
+            {
+                return null;
+            }
+
+            articleToUpdate.Title = article.Title;
+            articleToUpdate.Content=article.Content;
+            articleToUpdate.DatePublished=article.DatePublished;
+            articleToUpdate.IsPublished = article.IsPublished;
+
+            _context.Articles.Update(articleToUpdate);
+            await _context.SaveChangesAsync();
+
+            return articleToUpdate;
+        }
     }
 }
