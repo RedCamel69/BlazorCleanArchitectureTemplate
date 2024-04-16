@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.Domain", "BCAT.Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.Application", "BCAT.Application\BCAT.Application.csproj", "{2E5865E2-6A4A-4869-A7A4-D415FD3946D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCAT.Infrastructure", "BCAT.Infrastructure\BCAT.Infrastructure.csproj", "{481F6B00-E0A8-4AC8-900F-36F02AA12DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCAT.Infrastructure", "BCAT.Infrastructure\BCAT.Infrastructure.csproj", "{481F6B00-E0A8-4AC8-900F-36F02AA12DBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

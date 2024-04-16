@@ -1,6 +1,6 @@
-using BCAT.WebUI.Server.Components;
 using BCAT.Application;
 using BCAT.Infrastructure;
+using BCAT.WebUI.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 

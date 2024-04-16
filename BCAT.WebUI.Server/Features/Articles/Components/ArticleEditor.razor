@@ -1,0 +1,34 @@
+﻿@page "/article-editor"
+
+@using BCAT.Application.Articles.CreateArticle;
+@using Mapster;
+@using MediatR;
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+@inject ISender Sender;
+
+<PageTitle>Create new Article</PageTitle>
+<h3>Create new Article</h3>
+
+<EditForm Model="Article" OnSubmit="HandleSubmit" FormName="ArticleEditorForm">
+    <InputText class="form-control" @bind-Value="Article.Title"></InputText>
+    <InputTextArea class="form-control" @bind-Value="Article.Content"></InputTextArea>
+    <InputDate class="form-control" @bind-Value="Article.DatePublished"></InputDate>
+    <div>
+        <InputCheckbox class="form-control form-check-input" @bind-Value="Article.IsPublished"></InputCheckbox>
+        <label class="form-check-label">Is Published</label>   
+    </div>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    public ArticleModel Article { get; set; } = new(){ Title = string.Empty};
+
+    async Task HandleSubmit()
+    {
+        var command = Article.Adapt<CreateArticleCommand>();
+        var result = await Sender.Send(command);
+    }
+}

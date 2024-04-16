@@ -1,8 +1,9 @@
 ﻿@page "/articles";
 @using BCAT.Application.Articles
-
 @using BCAT.Application.Articles.GetArticles
 @using BCAT.Domain.Articles
+@using Microsoft.AspNetCore.Components.Web
+@using MediatR;
 
 @attribute [StreamRendering]
 
@@ -11,6 +12,7 @@
 <PageTitle>Articles</PageTitle>
 <h3>Articles</h3>
 
+<a href="/article-editor" class="btn btn-primary">Create new Article</a>
 @if (articles.Count == 0)
 {
     <p><em>loading....</em></p>
