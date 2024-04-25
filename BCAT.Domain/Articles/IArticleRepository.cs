@@ -15,5 +15,7 @@ namespace BCAT.Domain.Articles
         Task<Article> CreateArticleAsync(Article article);
 
         Task<Article?> UpdateArticleAsync(Article article);
+
+        Task<bool> DeleteArticleAsync(int id);
     }
 }

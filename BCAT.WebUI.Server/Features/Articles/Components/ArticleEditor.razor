@@ -2,6 +2,7 @@
 @page "/article-editor/{ArticleId:int}"
 
 @using BCAT.Application.Articles.CreateArticle;
+@using BCAT.Application.Articles.DeleteArticle
 @using Mapster;
 @using MediatR;
 @using Microsoft.AspNetCore.Components.Forms
@@ -33,8 +34,20 @@ else
             <InputCheckbox class="form-control form-check-input" @bind-Value="Article.IsPublished"></InputCheckbox>
             <label class="form-check-label">Is Published</label>   
         </div>
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </EditForm>
+
+    <!-- work around for a standalone button in SSR -->
+    @if (isEditMode)
+    {
+        <p>
+            <form @onsubmit="DeleteArticle" @formname="DeleteArticleForm" method="post">
+                <button class="btn btn-danger">Delete Article</button>
+                <!-- mandatory! -->
+                <AntiforgeryToken/>
+            </form>
+        </p>
+    }
 }
 
 @code {
@@ -82,6 +95,22 @@ else
             NavigationManager.NavigateTo($"/article-editor/{result!.Id}");
             //Article = result.Adapt<ArticleModel>();
 
+        }
+    }
+
+    async Task DeleteArticle()
+    {
+        if(ArticleId is null)
+        {
+            return;
+        }
+
+        var command = new DeleteArticleCommand { Id = (int)ArticleId };
+        var result = await Sender.Send(command);
+
+        if (result)
+        {
+            NavigationManager.NavigateTo("/articles");
         }
     }
 }
