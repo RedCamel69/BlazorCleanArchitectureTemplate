@@ -1,6 +1,6 @@
-﻿namespace BCAT.WebUI.Server.Features.Articles
+﻿namespace BCAT.WebUI.Server.Features.Books
 {
-    public class ArticleModel
+    public class BookModel
     {
         public int Id { get; set; }
         public required string Title { get; set; } = string.Empty;

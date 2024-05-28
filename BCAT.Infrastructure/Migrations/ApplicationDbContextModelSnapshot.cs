@@ -22,7 +22,7 @@ namespace BCAT.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BCAT.Domain.Articles.Article", b =>
+            modelBuilder.Entity("BCAT.Domain.Books.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace BCAT.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Books");
                 });
 #pragma warning restore 612, 618
         }

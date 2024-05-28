@@ -1,0 +1,58 @@
+﻿@page "/Books";
+@using BCAT.Application.Books
+@using BCAT.Application.Books.GetBooks
+@using BCAT.Domain.Books
+@using Microsoft.AspNetCore.Components.Web
+@using MediatR;
+
+@attribute [StreamRendering]
+
+@inject ISender Sender;
+
+<PageTitle>Books</PageTitle>
+<h3>Books</h3>
+
+<a href="/Book-editor" class="btn btn-primary">Create new Book</a>
+@if (BookList.Count == 0)
+{
+    <p><em>loading....</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>               
+                <th scope="col">Title</th>
+                <th scope="col">Date Published</th>                
+            </tr>
+        </thead>
+    @foreach (BookResponse br in BookList)
+    {
+        <tr>           
+            <td>@br.Title</td>
+            <td><small>@br.DatePublished.ToString("dd-MM-yyyy")</small></td>
+            <td><a href="/Book-editor/@br.Id">Edit Book</a></td>
+        </tr>
+    }
+
+    </table>
+}
+
+@code {
+    private List<BookResponse> BookList = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await Task.Delay(1000);
+
+        var result = await Sender.Send(new GetBooksQuery());
+        if (result != null)
+        {
+            BookList = result;
+        }
+
+    }
+
+
+}

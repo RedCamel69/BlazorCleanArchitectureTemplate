@@ -1,0 +1,130 @@
+﻿@page "/Book-editor"
+@page "/Book-editor/{BookId:int}"
+
+@using BCAT.Application.Books.CreateBook;
+@using BCAT.Application.Books.DeleteBook
+
+
+@using Mapster;
+@using MediatR;
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+@inject ISender Sender;
+@inject NavigationManager NavigationManager;
+
+@if (isEditMode && Book is not null)
+{
+    <PageTitle>Edit Book @Book.Title</PageTitle>
+    <h3>Edit Book @Book.Title</h3>
+}
+else
+{
+    <PageTitle>Create new Book</PageTitle>
+    <h3>Create new Book</h3>
+
+}
+
+@if (Book is not null)
+{
+    <EditForm Model="Book" OnSubmit="HandleSubmit" FormName="BookEditorForm">
+        <div class="mb-3">
+            <label for="title" class="form-label">Book Title</label>
+            <InputText id="title" class="form-control" @bind-Value="Book.Title"></InputText>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="Book.Content"></InputTextArea>
+        </div>
+        <div class="mb-3">
+            <label for="date-published" class="form-label">Date Published</label>
+            <InputDate id="date-published" class="form-control" @bind-Value="Book.DatePublished"></InputDate>
+        </div>
+        <div class="mb-3">
+            <InputCheckbox class="form-control form-check-input" @bind-Value="Book.IsPublished"></InputCheckbox>
+            <label class="form-check-label">Is Published</label>   
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </EditForm>
+
+    <!-- work around for a standalone button in SSR -->
+    @if (isEditMode)
+    {
+        <p>
+            <form @onsubmit="DeleteBook" @formname="DeleteBookForm" method="post">
+                <button class="btn btn-danger">Delete Book</button>
+                <!-- mandatory! -->
+                <AntiforgeryToken/>
+            </form>
+        </p>
+    }
+}
+
+@code {
+    private bool isEditMode => BookId != null;
+    [SupplyParameterFromForm]
+    public BookModel? Book { get; set; }
+    [Parameter]
+    public int? BookId{ get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(BookId is not null)
+        {
+            var result = await Sender.Send(
+                new GetBookByIdQuery() {
+                     Id=(int)BookId
+                });
+
+            if (result is not null)
+            {
+                Book ??= result.Adapt<BookModel>();
+                Book.Id = (int)BookId; //SSR gotcha
+            }
+        }
+        else
+        {
+            Book ??= new() { Title = string.Empty};
+        }
+
+    }
+
+    async Task HandleSubmit()
+    {
+        if (isEditMode)
+        {
+            var command = Book.Adapt<UpdateBookCommand>();
+            var result = Sender.Send(command);
+            if (result is not null)
+            {               
+                Book = result.Adapt<BookModel>();
+                // Navigate to a relative URL
+                NavigationManager.NavigateTo("/books");
+            }
+        }
+        else
+        {
+            var command = Book.Adapt<CreateBookCommand>();
+            var result = await Sender.Send(command);
+            NavigationManager.NavigateTo($"/Book-editor/{result!.Id}");
+            //Book = result.Adapt<BookModel>();
+
+        }
+    }
+
+    async Task DeleteBook()
+    {
+        if(BookId is null)
+        {
+            return;
+        }
+
+        var command = new DeleteBookCommand { Id = (int)BookId };
+        var result = await Sender.Send(command);
+
+        if (result)
+        {
+            NavigationManager.NavigateTo("/Books");
+        }
+    }
+}

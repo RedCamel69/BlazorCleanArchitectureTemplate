@@ -1,4 +1,4 @@
-﻿using BCAT.Domain.Articles;
+﻿using BCAT.Domain.Books;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCAT.Application.Articles.CreateArticle
+namespace BCAT.Application.Books.CreateBook
 {
-    public class CreateArticleCommand : IRequest<ArticleResponse>
+    public class CreateBookCommand : IRequest<BookResponse>
     {
-        //public ArticleResponse? Article { get; set; }
+        //public BookResponse? Book { get; set; }
         public int Id { get; set; }
         public required string Title { get; set; } 
         public string? Content { get; set; }

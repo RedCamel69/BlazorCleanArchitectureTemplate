@@ -1,4 +1,4 @@
-﻿using BCAT.Domain.Articles;
+﻿using BCAT.Domain.Books;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,6 @@ namespace BCAT.Infrastructure
             
         }
 
-        public DbSet<Article> Articles { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }

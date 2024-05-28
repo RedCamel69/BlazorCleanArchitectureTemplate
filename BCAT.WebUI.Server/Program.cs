@@ -2,6 +2,7 @@ using BCAT.Application;
 using BCAT.Infrastructure;
 using BCAT.WebUI.Server;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

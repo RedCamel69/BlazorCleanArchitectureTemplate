@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCAT.Application.Articles.DeleteArticle
+namespace BCAT.Application.Books.GetBookById
 {
-    public class DeleteArticleCommand : IRequest<bool>
+    public class GetBookByIdQuery : IRequest<BookResponse?>
     {
         public int Id { get; set; }
     }

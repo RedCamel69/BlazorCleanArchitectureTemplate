@@ -1,4 +1,4 @@
-﻿using BCAT.Domain.Articles;
+﻿using BCAT.Domain.Books;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCAT.Application.Articles.GetArticles
+namespace BCAT.Application.Books.GetBooks
 {
-    public class GetArticlesQuery : IRequest<List<ArticleResponse>>
+    public class GetBooksQuery : IRequest<List<BookResponse>>
     {
     }
 }

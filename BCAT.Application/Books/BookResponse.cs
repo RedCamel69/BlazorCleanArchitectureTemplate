@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BCAT.Application.Articles
+namespace BCAT.Application.Books
 {
-    //general article DTO
-    public record struct ArticleResponse
+    //general Book DTO
+    public record struct BookResponse
     {
         public int Id;
         public string Title;

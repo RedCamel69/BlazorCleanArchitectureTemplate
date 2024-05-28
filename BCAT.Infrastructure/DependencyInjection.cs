@@ -1,5 +1,5 @@
-﻿using BCAT.Application.Articles;
-using BCAT.Domain.Articles;
+﻿using BCAT.Application.Books;
+using BCAT.Domain.Books;
 using BCAT.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +23,7 @@ namespace BCAT.Infrastructure
                     configuration.GetConnectionString("DefaultConnection")
                     ));
 
-            services.AddScoped<IArticleRepository,ArticleRepository>();  
+            services.AddScoped<IBookRepository,BookRepository>();  
             return services;
         }
     }
